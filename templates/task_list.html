@@ -10,16 +10,21 @@
             <th scope="col">Title</th>
             <th scope="col">Detail</th>
             <th scope="col">Updated At</th>
+            <th scope="col">Completed</th>
         </tr>
         </thead>
         <tbody>
         {% for task in tasks %}
             <tr>
                 <th scope="row">{{ task.id }}</th>
-                <td>{{ task.title }}</td>
+                <td><a style="text-decoration: none" href="{% url 'TaskDetail' task.id %}">{{ task.title }}</a></td>
                 <td>{{ task.detail }}</td>
                 <td>{{ task.updated_at }}</td>
+                <td><input type="checkbox" {% if task.completed %}checked{% endif %} disabled></td>
             </tr>
+        {% empty %}
+            <th scope="row">*</th>
+            <td colspan="4">No Tasks! 🥺</td>
         {% endfor %}
         </tbody>
     </table>

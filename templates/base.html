@@ -8,14 +8,32 @@
     <title>NovaX Todo App {% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <nav class="row p-3" style="background-color: darkgray;">
-    <div class="col-8">
-        <h2><a style="text-decoration: none; color: black;" href=''>Main menu</a></h2>
+    <div class="col-4">
+        <h2><a style="text-decoration: none; color: black;" href='/'>Main menu</a></h2>
     </div>
-    <div class="col-4 d-flex align-items-center">
-        seffwe
+
+    <div class="col-4 d-flex justify-content-center align-items-center">
+        {% if request.user.is_authenticated %}
+            <h4>Hello Dear {{ request.user }}</h4>
+        {% else %}
+            <a class="btn btn-success mx-2" href="{% url 'Login' %}">Login!</a>
+            <a class="btn btn-success mx-2" href="{% url 'Signup' %}">Signup!</a>
+        {% endif %}
+    </div>
+
+    <div class="col-4 d-flex justify-content-around align-items-center">
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-danger" href="{% url 'Logout' %}">Log Out!</a>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'TaskCreate' %}">Create Task!</a>
     </div>
 </nav>
 <main class="container mt-3">

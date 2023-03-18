@@ -5,6 +5,7 @@ from user.models import User
 class Task(models.Model):
     title = models.CharField(max_length=255, unique=True)
     detail = models.TextField(null=True, blank=True)
+    completed = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -14,4 +15,4 @@ class Task(models.Model):
         return self.title
     
     class Meta:
-        ordering = ('updated_at',)
+        ordering = ('-updated_at',)

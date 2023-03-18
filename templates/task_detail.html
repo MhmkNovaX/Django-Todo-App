@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}| {{ task.title }}{% endblock %}
+{% block content %}
+
+    <form action="" method="post">{% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Task Title:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{ task.title }}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Task Detail:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="detail"
+                      rows="3">{{ task.detail }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="completed" class="form-label">Completed:</label>
+            <input type='hidden' value='0' name='completed'>
+            <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %} value="1"/>
+        </div>
+        <p>Created At: {{ task.created_at }}</p>
+        <input class="btn btn-primary col-12" type="submit">
+    </form>
+    <form class="mt-3" method="post">{% csrf_token %}
+        <input class="btn btn-danger col-12" type="submit" name="delete" value="Delete!"/>
+    </form>
+{% endblock %}

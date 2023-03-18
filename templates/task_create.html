@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}| Create Task{% endblock %}
+{% block content %}
+    <h1>Create Form:</h1>
+    <form class="my-5" method="post">{% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Task Title:</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="detail" class="form-label">Task Detail:</label>
+            <textarea class="form-control" id="detail" name="detail"
+                      rows="3"></textarea>
+        </div>
+        <input class="btn btn-primary col-12" type="submit">
+    </form>
+{% endblock %}
